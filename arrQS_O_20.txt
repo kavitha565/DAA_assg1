@@ -18,4 +18,4 @@
 5 22 92
 52 65 95
 43 45 98
-Time taken to sort - 0.000020 seconds
+Time taken to sort - 0.000027 seconds

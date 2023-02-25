@@ -1,9 +1,24 @@
+import random
 from timeit import default_timer as timer
 
-def saveOutputToFile(sortedArrays, fileName):
+def generateListsAndSaveToFile():
+    arrSizes = [20, 100, 2000, 6000]
+    for size in arrSizes:
+        randomArr = []
+        for _ in range(size):
+            arr = []
+            for _ in range(3):
+                arr.append(random.randint(0,99))
+            randomArr.append(arr)
+        with open(f"arr{size}.txt", "w") as f:
+            for arr in randomArr:
+                f.write(" ".join(str(ele) for ele in arr)+"\n")
+                
+def saveOutputToFile(sortedArrays, fileName, timeTaken):
     with open(fileName, "w") as f:
         for arr in sortedArrays:
             f.write(" ".join(str(ele) for ele in arr)+"\n")
+        f.write(f"Time taken to sort - {timeTaken:6f} seconds")
 
 def merge(arr,p,q,r,sortByLastColumn):
     len1 = q-p+1
@@ -69,7 +84,7 @@ def sortData(inputFileName,outputFileName):
         timeTaken = timer() - beforeTime
         print(f"Time taken to sort array of size {len(arrays)} by merge sort is {timeTaken:6f} seconds")
         
-        saveOutputToFile(arrays,outputFileName)
+        saveOutputToFile(arrays,outputFileName,timeTaken)
 
 
 
@@ -78,5 +93,4 @@ sortData('arr20.txt','arrMS_O_20.txt')
 sortData('arr100.txt','arrMS_O_100.txt')
 sortData('arr2000.txt','arrMS_O_2000.txt')
 sortData('arr6000.txt','arrMS_O_6000.txt')
-sortData('arr10000.txt','arrMS_O_10000.txt')
 
